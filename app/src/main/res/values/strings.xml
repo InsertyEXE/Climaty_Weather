@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Climaty Weather</string>
+    <string name="search">Search city . . .</string>
+    <string name="home">Home</string>
+    <string name="favorite">Favorite</string>
+</resources>
