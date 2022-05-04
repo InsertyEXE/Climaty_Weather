@@ -2,6 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white_matte"
+    android:focusableInTouchMode="true"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <SearchView
@@ -11,7 +13,7 @@
         android:imeOptions="actionDone"
         android:inputType="textPersonName"
         android:background="@drawable/view_search_style"
-        android:queryHint="@string/search"
+        android:queryHint="@string/search_city"
         android:iconifiedByDefault="false"
         android:layout_marginTop="16dp"
         android:layout_marginStart="40dp"
