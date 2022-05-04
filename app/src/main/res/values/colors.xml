@@ -14,9 +14,11 @@
     <color name="cinza_escuro">#2C2F42</color>
     <color name="branco">#E1E2E4</color>
     
-    <!-- Thema claro -->
-    <color name="white">#E1E2E4</color>
+    <!-- Thema claro E1E2E4 -->
+    <color name="white">#FFFFFF</color>
     <color name="white_matte">#E7E4F5</color>
     <color name="purple_matte">#C4B9E6</color>
     <color name="yellow">#FDA52A</color>
+    <color name="yellow_matte">#FCD9A0</color>
+    <color name="blue_matte">#616EDD</color>
 </resources>
