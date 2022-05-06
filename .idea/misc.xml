@@ -3,13 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Projetos/Projetos Android/Projetos kotlin/climatyweather/app/src/main/res/drawable/background_gd.xml" value="0.2105" />
         <entry key="..\:/Projetos/Projetos Android/Projetos kotlin/climatyweather/app/src/main/res/drawable/cursor_style.xml" value="0.1855" />
         <entry key="..\:/Projetos/Projetos Android/Projetos kotlin/climatyweather/app/src/main/res/drawable/nav_bottom_style.xml" value="0.1855" />
         <entry key="..\:/Projetos/Projetos Android/Projetos kotlin/climatyweather/app/src/main/res/drawable/view_search_style.xml" value="0.1855" />
         <entry key="..\:/Projetos/Projetos Android/Projetos kotlin/climatyweather/app/src/main/res/layout/activity_main.xml" value="0.24114583333333334" />
         <entry key="..\:/Projetos/Projetos Android/Projetos kotlin/climatyweather/app/src/main/res/layout/fragmen_search.xml" value="0.2552083333333333" />
         <entry key="..\:/Projetos/Projetos Android/Projetos kotlin/climatyweather/app/src/main/res/layout/fragment_home.xml" value="0.33" />
-        <entry key="..\:/Projetos/Projetos Android/Projetos kotlin/climatyweather/app/src/main/res/layout/fragment_search.xml" value="0.18072916666666666" />
+        <entry key="..\:/Projetos/Projetos Android/Projetos kotlin/climatyweather/app/src/main/res/layout/fragment_search.xml" value="0.2" />
         <entry key="..\:/Projetos/Projetos Android/Projetos kotlin/climatyweather/app/src/main/res/menu/menu_main_bottom.xml" value="0.2552083333333333" />
       </map>
     </option>

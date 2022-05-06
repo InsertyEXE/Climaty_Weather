@@ -21,4 +21,9 @@
     <color name="yellow">#FDA52A</color>
     <color name="yellow_matte">#FCD9A0</color>
     <color name="blue_matte">#616EDD</color>
+
+    <color name="roxo">#737DFE</color>
+    <color name="beje">#FFCAC9</color>
+    <color name="preto">#18191d</color>
+    <color name="azul_claro">#27DEF2</color>
 </resources>
