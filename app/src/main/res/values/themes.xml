@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.ClimatyWeather" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/yellow</item>
+        <item name="colorPrimary">@color/azul_claro</item>
         <item name="colorPrimaryVariant">@color/cinza_escuro</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
