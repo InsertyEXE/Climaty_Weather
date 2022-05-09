@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@color/white_matte">
+    android:background="@color/preto">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:name="com.example.climatyweather.HomeFragment"
-        tools:layout="@layout/fragment_home"
+        tools:layout="@layout/fragment_search"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/main_nav_bottom" />
 
@@ -22,7 +23,7 @@
         android:layout_height="wrap_content"
         app:menu="@menu/menu_main_bottom"
         android:background="@drawable/nav_bottom_style"
-        app:itemIconTint="@color/cinza_escuro"
+        app:itemIconTint="@color/azul_claro"
         app:labelVisibilityMode="selected"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
