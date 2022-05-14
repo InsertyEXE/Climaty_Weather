@@ -1,10 +1,11 @@
-package com.example.climatyweather
+package com.example.climatyweather.view
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.example.climatyweather.R
+import com.example.climatyweather.model.SearchAdapter
 import com.example.climatyweather.databinding.FragmentSearchBinding
 
 class SearchFragment: Fragment(R.layout.fragment_search) {

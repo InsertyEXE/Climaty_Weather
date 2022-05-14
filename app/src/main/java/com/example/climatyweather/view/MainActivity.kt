@@ -1,9 +1,10 @@
-package com.example.climatyweather
+package com.example.climatyweather.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
+import com.example.climatyweather.R
 import com.example.climatyweather.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
