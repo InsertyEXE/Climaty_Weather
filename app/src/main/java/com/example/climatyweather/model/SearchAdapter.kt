@@ -1,9 +1,10 @@
-package com.example.climatyweather
+package com.example.climatyweather.model
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.climatyweather.R
 import kotlinx.android.synthetic.main.item_result.view.*
 
 class SearchAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
