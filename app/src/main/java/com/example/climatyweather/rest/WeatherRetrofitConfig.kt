@@ -4,13 +4,19 @@ import com.example.climatyweather.model.WeatherApiResult
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface WeatherRetrofitConfig {
 
-    @GET("weather?q={city}units=metric&appid={api_key}lang=pt_br")
-    fun fetchCity(@Path("city") city: String): Call<WeatherApiResult>
+    //weather?q={city}&units=metric&appid=fccbdc41f2bb5a0b09266288a1a820celang=pt_br
+    @GET("weather")
+    fun fetchCity(
+        @Query("q") city: String,
+        @Query("units") units: String = "metric",
+        @Query("appid") appid: String = "fccbdc41f2bb5a0b09266288a1a820ce",
+        @Query("lang") lang: String = "pt_br"
+
+    ): Call<WeatherApiResult>
 
     companion object {
 
@@ -25,7 +31,7 @@ interface WeatherRetrofitConfig {
 
         }
 
-        fun getInstance(): WeatherRetrofitConfig{
+        fun getInstance(): WeatherRetrofitConfig {
             return retrofitService
         }
 
