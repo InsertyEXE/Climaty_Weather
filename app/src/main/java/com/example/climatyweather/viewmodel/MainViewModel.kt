@@ -12,24 +12,30 @@ import retrofit2.Response
 
 class MainViewModel(private val repository: MainRepository): ViewModel() {
 
-    var city = MutableLiveData<String>()
+    var city = MutableLiveData<WeatherApiResult>()
+    var errorMessage = MutableLiveData<String>()
 
     fun fetchCity(citySearch: String){
 
         val request = repository.fetchCity(citySearch)
+
 
         request.enqueue(object : Callback<WeatherApiResult>{
             override fun onResponse(
                 call: Call<WeatherApiResult>,
                 response: Response<WeatherApiResult>
             ) {
+                if (response.isSuccessful){
+                    val body = response.body()
+                    city.postValue(body)
+                }
+                else{
+                    errorMessage.postValue("City Not Found")
+                }
 
-                val body = response.body()
-                city.postValue(body?.name.toString())
-                Log.i("city", body.toString())
             }
             override fun onFailure(call: Call<WeatherApiResult>, t: Throwable) {
-                //errormessage
+                errorMessage.postValue("Server")
             }
 
         })

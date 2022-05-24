@@ -1,8 +1,11 @@
 package com.example.climatyweather.view
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
+import android.location.LocationManager
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -15,11 +18,14 @@ import com.example.climatyweather.databinding.FragmentHomeBinding
 import com.example.climatyweather.rest.WeatherRetrofitConfig
 import com.example.climatyweather.viewmodel.MainViewModel
 import com.example.climatyweather.viewmodel.MainViewModelFactory
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import kotlin.math.roundToInt
 
 const val LOCALITION_PERMISSON_CODE = 1000
 private val retrofitService = WeatherRetrofitConfig.getInstance()
 
-class HomeFragment: Fragment(R.layout.fragment_home) {
+class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private var binding: FragmentHomeBinding? = null
 
@@ -27,6 +33,9 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentHomeBinding.bind(view)
+
+        permissions()
+        locationPhone()
 
         viewModel = ViewModelProvider(
             this,
@@ -40,33 +49,70 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
     override fun onStart() {
         super.onStart()
 
-        permissions()
-
         viewModel.fetchCity("franco da rocha")
-        viewModel.city.observe(this, Observer { city ->
-            binding?.homeTxtCity?.text = city
+        viewModel.city.observe(this, Observer { weather ->
+
+            binding?.homeTxtCity?.text = weather.name
+
+            binding?.homeTxtWeather?.text = weather.weather[0].main
+            binding?.homeTxtStats?.text = weather.weather[0].description
+
+            binding?.homeTxtTemp?.text = "${weather.main.temp.roundToInt().toString()}C°"
+            binding?.homeTxtFeelLike?.text = "${weather.main.feels_like.roundToInt()}C°"
+            binding?.homeTxtHumidity?.text = "${weather.main.humidity}%"
+            binding?.homeTxtWind?.text = "${weather.wind.speed} m/s"
+
+
         })
+
+        //TODO: click and change Celsium to fahrenheit
 
 
     }
 
     private fun permissions() {
-        if (!isPermissionGranted()) {
+        if (!isPermissionGranted())
             requestLocationPermission()
+    }
+
+
+    private fun locationPhone() {
+        val localition = FusedLocationProviderClient(requireContext())
+        val fosuedLocationProvider =
+            LocationServices.getFusedLocationProviderClient(requireContext())
+
+        //Necessary code to use locationServices
+        if (ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED)
+
+        fosuedLocationProvider.lastLocation.addOnSuccessListener {
+
         }
+
+        localition.lastLocation.addOnSuccessListener {
+            Log.i("lat", it.latitude.toString())
+            Log.i("lon", it.longitude.toString())
+        }
+
     }
 
     private fun isPermissionGranted(): Boolean {
         return ContextCompat.checkSelfPermission(
             requireContext(),
-            Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS
+            Manifest.permission.ACCESS_FINE_LOCATION
         ) == PackageManager.PERMISSION_GRANTED
     }
 
     private fun requestLocationPermission() {
+
         return ActivityCompat.requestPermissions(
             requireActivity(),
-            arrayOf(Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS),
+            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
             LOCALITION_PERMISSON_CODE
         )
     }
