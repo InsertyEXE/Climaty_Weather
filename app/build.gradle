@@ -38,6 +38,8 @@ android {
 
 dependencies {
 
+    //Api GOOGLE location
+    implementation 'com.google.android.gms:play-services-location:19.0.1'
 
     //Rest
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
