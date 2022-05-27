@@ -1,12 +1,10 @@
 package com.example.climatyweather.view
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.content.pm.PackageManager
-import android.location.LocationManager
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -24,6 +22,8 @@ import kotlin.math.roundToInt
 
 const val LOCALITION_PERMISSON_CODE = 1000
 private val retrofitService = WeatherRetrofitConfig.getInstance()
+private lateinit var lat: String
+private lateinit var lon: String
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
@@ -49,7 +49,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onStart() {
         super.onStart()
 
-        viewModel.fetchCity("franco da rocha")
+
+        viewModel.errorMessage.observe(this, Observer{
+            Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
+        })
+
+
         viewModel.city.observe(this, Observer { weather ->
 
             binding?.homeTxtCity?.text = weather.name
@@ -70,6 +75,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     }
 
+
+
     private fun permissions() {
         if (!isPermissionGranted())
             requestLocationPermission()
@@ -81,7 +88,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         val fosuedLocationProvider =
             LocationServices.getFusedLocationProviderClient(requireContext())
 
-        //Necessary code to use locationServices
+        //required code to use locationServices
         if (ActivityCompat.checkSelfPermission(
                 requireContext(),
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -91,12 +98,16 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             ) != PackageManager.PERMISSION_GRANTED)
 
         fosuedLocationProvider.lastLocation.addOnSuccessListener {
-
+            lat = it.latitude.toString()
+            lon = it.longitude.toString()
+            viewModel.locationPhone(lat, lon)
         }
 
         localition.lastLocation.addOnSuccessListener {
-            Log.i("lat", it.latitude.toString())
-            Log.i("lon", it.longitude.toString())
+            lat = it.latitude.toString()
+            lon = it.longitude.toString()
+
+            viewModel.locationPhone(lat, lon)
         }
 
     }

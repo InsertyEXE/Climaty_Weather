@@ -1,6 +1,5 @@
 package com.example.climatyweather.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.climatyweather.MainRepository
@@ -10,14 +9,15 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class MainViewModel(private val repository: MainRepository): ViewModel() {
+class MainViewModel(private val repository: MainRepository) : ViewModel() {
 
     var city = MutableLiveData<WeatherApiResult>()
     var errorMessage = MutableLiveData<String>()
 
-    fun fetchCity(citySearch: String){
 
-        val request = repository.fetchCity(citySearch)
+    fun locationPhone(lat: String, lon: String) {
+
+        val request = repository.fetchLocationPhone(lat, lon)
 
 
         request.enqueue(object : Callback<WeatherApiResult>{
@@ -25,22 +25,18 @@ class MainViewModel(private val repository: MainRepository): ViewModel() {
                 call: Call<WeatherApiResult>,
                 response: Response<WeatherApiResult>
             ) {
-                if (response.isSuccessful){
-                    val body = response.body()
-                    city.postValue(body)
-                }
-                else{
-                    errorMessage.postValue("City Not Found")
-                }
-
+                if (response.isSuccessful)
+                    city.postValue(response.body())
+                else
+                    errorMessage.postValue("Location Not Found")
             }
+
             override fun onFailure(call: Call<WeatherApiResult>, t: Throwable) {
-                errorMessage.postValue("Server")
+                errorMessage.postValue("Server error")
             }
 
         })
 
-
-
     }
+
 }
