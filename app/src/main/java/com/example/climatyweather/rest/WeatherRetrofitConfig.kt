@@ -21,12 +21,12 @@ interface WeatherRetrofitConfig {
     //https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}
     @GET("weather")
     fun fetchLocationPhone(
-        @Query("lat") lat: Double,
-        @Query("lon") lon: Double,
+        @Query("lat") lat: String,
+        @Query("lon") lon: String,
         @Query("appid") appid: String = "fccbdc41f2bb5a0b09266288a1a820ce",
         @Query("units") units: String = "metric",
         @Query("lang") lang: String = "pt_br"
-    )
+    ): Call<WeatherApiResult>
 
     companion object {
 

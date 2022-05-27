@@ -6,5 +6,5 @@ class MainRepository(private val retrofitService: WeatherRetrofitConfig) {
 
     fun fetchCity(city: String) = retrofitService.fetchCity(city)
 
-    fun fetchLocationPhone(lat: Double, lon: Double) = retrofitService.fetchLocationPhone(lat, lon)
+    fun fetchLocationPhone(lat: String, lon: String) = retrofitService.fetchLocationPhone(lat, lon)
 }
