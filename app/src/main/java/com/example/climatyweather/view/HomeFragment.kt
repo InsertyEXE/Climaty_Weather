@@ -20,10 +20,12 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import kotlin.math.roundToInt
 
+
 const val LOCALITION_PERMISSON_CODE = 1000
 private val retrofitService = WeatherRetrofitConfig.getInstance()
 private lateinit var lat: String
 private lateinit var lon: String
+private lateinit var viewModel: MainViewModel
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
@@ -62,7 +64,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             binding?.homeTxtWeather?.text = weather.weather[0].main
             binding?.homeTxtStats?.text = weather.weather[0].description
 
-            binding?.homeTxtTemp?.text = "${weather.main.temp.roundToInt().toString()}C°"
+            binding?.homeTxtTemp?.text = "${weather.main.temp.roundToInt()}C°"
             binding?.homeTxtFeelLike?.text = "${weather.main.feels_like.roundToInt()}C°"
             binding?.homeTxtHumidity?.text = "${weather.main.humidity}%"
             binding?.homeTxtWind?.text = "${weather.wind.speed} m/s"

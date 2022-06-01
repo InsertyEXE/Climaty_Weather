@@ -16,7 +16,7 @@ interface WeatherRetrofitConfig {
         @Query("appid") appid: String = "fccbdc41f2bb5a0b09266288a1a820ce",
         @Query("lang") lang: String = "pt_br"
 
-    ): Call<WeatherApiResult>
+    ): Call<List<WeatherApiResult>>
 
     //https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}
     @GET("weather")
@@ -27,6 +27,7 @@ interface WeatherRetrofitConfig {
         @Query("units") units: String = "metric",
         @Query("lang") lang: String = "pt_br"
     ): Call<WeatherApiResult>
+
 
     companion object {
 
