@@ -6,7 +6,6 @@ import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import com.example.climatyweather.R
 import com.example.climatyweather.databinding.ActivityMainBinding
-import com.example.climatyweather.viewmodel.MainViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 private lateinit var binding: ActivityMainBinding
@@ -15,9 +14,6 @@ private lateinit var searchFragment: SearchFragment
 private lateinit var favoriteFragment: FavoriteFragment
 
 private var currentFragment: Fragment? = null
-
-lateinit var viewModel: MainViewModel
-
 
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
     override fun onCreate(savedInstanceState: Bundle?) {
