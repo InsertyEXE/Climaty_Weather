@@ -3,6 +3,7 @@ package com.example.climatyweather.model
 data class WeatherApiResult(
     val coord: Coordiante,
     val weather: List<Weather>,
+    val sys: Sys,
     val main: Main,
     val wind: Wind,
     val name: String
@@ -29,3 +30,5 @@ data class Main(
     val feels_like: Float,
     val humidity: Int,
 )
+
+data class Sys(val country: String)
