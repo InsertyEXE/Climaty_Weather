@@ -10,7 +10,7 @@ import retrofit2.Response
 
 class SearchViewModel(private val repository: MainRepository): ViewModel() {
 
-    val searchCity = MutableLiveData<List<WeatherApiResult>>()
+    val searchCity = MutableLiveData<WeatherApiResult>()
     val errorMessage = MutableLiveData<String>()
 
 
@@ -18,16 +18,16 @@ class SearchViewModel(private val repository: MainRepository): ViewModel() {
 
         val request = repository.fetchCity(city)
 
-        request.enqueue(object : Callback<List<WeatherApiResult>>{
+        request.enqueue(object : Callback<WeatherApiResult>{
             override fun onResponse(
-                call: Call<List<WeatherApiResult>>,
-                response: Response<List<WeatherApiResult>>
+                call: Call<WeatherApiResult>,
+                response: Response<WeatherApiResult>
             ) {
                 if (response.isSuccessful)
                     searchCity.postValue(response.body())
             }
 
-            override fun onFailure(call: Call<List<WeatherApiResult>>, t: Throwable) {
+            override fun onFailure(call: Call<WeatherApiResult>, t: Throwable) {
                 errorMessage.postValue("Server error")
             }
 

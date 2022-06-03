@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.climatyweather.R
 import kotlinx.android.synthetic.main.item_result.view.*
 
-class SearchAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class SearchAdapter(val lista: List<WeatherApiResult>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private class ResultViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
@@ -17,9 +17,13 @@ class SearchAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         val temp = itemView.item_txt_temp
         val thumbnail = itemView.item_img_temp
 
-        fun bind(){
+        fun bind(city: WeatherApiResult){
 
             thumbnail.setImageResource(R.drawable.sun)
+            cityName.text = city.name
+            country.text = city.sys.country
+            status.text = city.weather[0].main
+            temp.text = city.main.temp.toString()
         }
     }
 
@@ -32,10 +36,10 @@ class SearchAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(holder){
             is ResultViewHolder -> {
-                holder.bind()
+                holder.bind(lista[position])
             }
         }
     }
 
-    override fun getItemCount() = 15
+    override fun getItemCount() = lista.size
 }
