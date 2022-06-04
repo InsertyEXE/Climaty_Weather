@@ -40,17 +40,17 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             SearchViewModel::class.java
             )
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+
         viewModel.searchCity.observe(viewLifecycleOwner, Observer {
 
             itemsCity.add(it)
             binding?.searchRv?.adapter = SearchAdapter(itemsCity)
 
         })
-
-    }
-
-    override fun onResume() {
-        super.onResume()
 
         binding?.searchSrc?.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(submit: String?): Boolean {
@@ -59,7 +59,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             }
 
             override fun onQueryTextChange(query: String?): Boolean {
-               // viewModel.fetchCity(query.toString())
+
                 return false
             }
 

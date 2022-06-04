@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.climatyweather.R
 import kotlinx.android.synthetic.main.item_result.view.*
+import kotlin.math.roundToInt
 
 class SearchAdapter(val lista: List<WeatherApiResult>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -23,7 +24,7 @@ class SearchAdapter(val lista: List<WeatherApiResult>): RecyclerView.Adapter<Rec
             cityName.text = city.name
             country.text = city.sys.country
             status.text = city.weather[0].main
-            temp.text = city.main.temp.toString()
+            temp.text = "C° ${city.main.temp.roundToInt()}"
         }
     }
 
