@@ -5,12 +5,13 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:backgroundTint="@color/blue_matte"
+
     android:layout_marginStart="16dp"
     android:layout_marginEnd="16dp"
     android:layout_marginTop="12dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@drawable/card_style"
         android:layout_width="match_parent"
         android:layout_height="150dp">
 
@@ -50,13 +51,11 @@
         <TextView
             android:id="@+id/item_txt_temp"
             style="@style/Theme.ClimatyWeather.BaseTextview"
-            android:layout_margin="12dp"
             android:fontFamily="@font/poppins_medium"
             android:text="32C°"
             android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/item_img_temp"
-
             app:layout_constraintStart_toEndOf="@+id/item_txt_status"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -69,6 +68,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/item_txt_temp"
             tools:srcCompat="@tools:sample/avatars" />
 
 
