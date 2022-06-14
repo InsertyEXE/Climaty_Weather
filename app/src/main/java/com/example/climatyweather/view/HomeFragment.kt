@@ -52,16 +52,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onResume() {
+        super.onResume()
 
 
-        viewModel.errorMessage.observe(this, Observer{
-            Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
-        })
-
-
-        viewModel.city.observe(this, Observer { weather ->
+        viewModel.city.observe(viewLifecycleOwner, Observer { weather ->
 
             binding?.homeTxtCity?.text = weather.name
 
@@ -74,9 +69,23 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             binding?.homeTxtWind?.text = "${weather.wind.speed} m/s"
 
 
+            when(weather.weather[0].icon){
+                "09d", "10d", "11d", "09n", "10n", "11n" -> binding?.homeImgNow?.setImageResource(R.drawable.rain)
+                "01d" -> binding?.homeImgNow?.setImageResource(R.drawable.sun)
+                "02d", "03d" -> binding?.homeImgNow?.setImageResource(R.drawable.sun_cloud)
+                "01n" -> binding?.homeImgNow?.setImageResource(R.drawable.moon)
+                "02n", "03n" -> binding?.homeImgNow?.setImageResource(R.drawable.moon_cloud)
+                "04d", "13d", "50d",  "04n", "13n", "50n" -> binding?.homeImgNow?.setImageResource(R.drawable.cloud)
+            }
+
+
         })
 
-        //TODO: click and change Celsium to fahrenheit
+        viewModel.errorMessage.observe(this, Observer{
+            Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
+        })
+
+
 
 
     }
@@ -112,7 +121,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         localition.lastLocation.addOnSuccessListener {
             lat = it.latitude.toString()
             lon = it.longitude.toString()
-
             viewModel.locationPhone(lat, lon)
         }
 
