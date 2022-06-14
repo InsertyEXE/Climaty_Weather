@@ -3,6 +3,7 @@ package com.example.climatyweather.view
 import android.os.Bundle
 import android.view.View
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 
@@ -45,9 +46,15 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     override fun onResume() {
         super.onResume()
 
+        viewModel.errorMessage.observe(viewLifecycleOwner, Observer {
+            Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
+        })
+
         viewModel.searchCity.observe(viewLifecycleOwner, Observer {
 
-            itemsCity.add(it)
+            if (!itemsCity.contains(it))
+                itemsCity.add(it)
+
             binding?.searchRv?.adapter = SearchAdapter(itemsCity)
 
         })

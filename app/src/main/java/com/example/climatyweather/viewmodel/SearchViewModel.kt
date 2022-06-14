@@ -25,6 +25,8 @@ class SearchViewModel(private val repository: MainRepository): ViewModel() {
             ) {
                 if (response.isSuccessful)
                     searchCity.postValue(response.body())
+                else
+                    errorMessage.postValue("City not found")
             }
 
             override fun onFailure(call: Call<WeatherApiResult>, t: Throwable) {

@@ -20,11 +20,20 @@ class SearchAdapter(val lista: List<WeatherApiResult>): RecyclerView.Adapter<Rec
 
         fun bind(city: WeatherApiResult){
 
-            thumbnail.setImageResource(R.drawable.sun)
             cityName.text = city.name
             country.text = city.sys.country
             status.text = city.weather[0].main
             temp.text = "C° ${city.main.temp.roundToInt()}"
+
+            when(city.weather[0].icon){
+                "09d", "10d", "11d", "09n", "10n", "11n" -> thumbnail.setImageResource(R.drawable.rain)
+                "01d" -> thumbnail.setImageResource(R.drawable.sun)
+                "02d", "03d" -> thumbnail.setImageResource(R.drawable.sun_cloud)
+                "01n" -> thumbnail.setImageResource(R.drawable.moon)
+                "02n", "03n" -> thumbnail.setImageResource(R.drawable.moon_cloud)
+                "04d", "13d", "50d",  "04n", "13n", "50n" -> thumbnail.setImageResource(R.drawable.cloud)
+            }
+
         }
     }
 
