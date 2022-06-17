@@ -8,7 +8,7 @@ import com.example.climatyweather.R
 import kotlinx.android.synthetic.main.item_result.view.*
 import kotlin.math.roundToInt
 
-class SearchAdapter(val lista: List<WeatherApiResult>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class SearchAdapter(val lista: List<WeatherApiResult>, private val onItemClicked: (WeatherApiResult) -> Unit): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private class ResultViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
@@ -18,7 +18,7 @@ class SearchAdapter(val lista: List<WeatherApiResult>): RecyclerView.Adapter<Rec
         val temp = itemView.item_txt_temp
         val thumbnail = itemView.item_img_temp
 
-        fun bind(city: WeatherApiResult){
+        fun bind(city: WeatherApiResult, onItemClicked: (WeatherApiResult) -> Unit){
 
             cityName.text = city.name
             country.text = city.sys.country
@@ -34,6 +34,10 @@ class SearchAdapter(val lista: List<WeatherApiResult>): RecyclerView.Adapter<Rec
                 "04d", "13d", "50d",  "04n", "13n", "50n" -> thumbnail.setImageResource(R.drawable.cloud)
             }
 
+            itemView.setOnClickListener {
+                onItemClicked(city)
+            }
+
         }
     }
 
@@ -46,7 +50,7 @@ class SearchAdapter(val lista: List<WeatherApiResult>): RecyclerView.Adapter<Rec
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(holder){
             is ResultViewHolder -> {
-                holder.bind(lista[position])
+                holder.bind(lista[position], onItemClicked)
             }
         }
     }

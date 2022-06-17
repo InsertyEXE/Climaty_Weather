@@ -11,7 +11,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 private lateinit var binding: ActivityMainBinding
 private lateinit var homeFragment: HomeFragment
 private lateinit var searchFragment: SearchFragment
-private lateinit var favoriteFragment: FavoriteFragment
 
 private var currentFragment: Fragment? = null
 
@@ -24,7 +23,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
         homeFragment = HomeFragment()
         searchFragment = SearchFragment()
-        favoriteFragment = FavoriteFragment()
 
         binding.mainNavBottom.setOnNavigationItemSelectedListener(this)
         binding.mainNavBottom.selectedItemId = R.id.menu_home
@@ -41,10 +39,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             R.id.menu_search -> {
                 if (currentFragment == searchFragment) return false
                 currentFragment = searchFragment
-            }
-            R.id.menu_fav -> {
-                if (currentFragment == favoriteFragment) return false
-                currentFragment = favoriteFragment
             }
         }
 
