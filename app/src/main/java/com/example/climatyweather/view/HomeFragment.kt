@@ -58,39 +58,39 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         viewModel.city.observe(viewLifecycleOwner, Observer { weather ->
 
-            binding?.homeTxtCity?.text = weather.name
+            binding?.let {
+                with(it) {
+                    homeTxtCity.text = weather.name
 
-            binding?.homeTxtWeather?.text = weather.weather[0].main
-            binding?.homeTxtStats?.text = weather.weather[0].description
+                    homeTxtWeather.text = weather.weather[0].main
+                    homeTxtStats.text = weather.weather[0].description
 
-            binding?.homeTxtTemp?.text = "${weather.main.temp.roundToInt()}C°"
-            binding?.homeTxtFeelLike?.text = "${weather.main.feels_like.roundToInt()}C°"
-            binding?.homeTxtHumidity?.text = "${weather.main.humidity}%"
-            binding?.homeTxtWind?.text = "${weather.wind.speed} m/s"
+                    homeTxtTemp.text = "${weather.main.temp.roundToInt()}C°"
+                    homeTxtFeelLike.text = "${weather.main.feels_like.roundToInt()}C°"
+                    homeTxtHumidity.text = "${weather.main.humidity}%"
+                    homeTxtWind.text = "${weather.wind.speed} m/s"
 
-
-            when(weather.weather[0].icon){
-                "09d", "10d", "11d", "09n", "10n", "11n" -> binding?.homeImgNow?.setImageResource(R.drawable.rain)
-                "01d" -> binding?.homeImgNow?.setImageResource(R.drawable.sun)
-                "02d", "03d" -> binding?.homeImgNow?.setImageResource(R.drawable.sun_cloud)
-                "01n" -> binding?.homeImgNow?.setImageResource(R.drawable.moon)
-                "02n", "03n" -> binding?.homeImgNow?.setImageResource(R.drawable.moon_cloud)
-                "04d", "13d", "50d",  "04n", "13n", "50n" -> binding?.homeImgNow?.setImageResource(R.drawable.cloud)
+                    when (weather.weather[0].icon) {
+                        "09d", "10d", "11d", "09n", "10n", "11n" -> binding?.homeImgNow?.setImageResource(
+                            R.drawable.rain
+                        )
+                        "01d" -> binding?.homeImgNow?.setImageResource(R.drawable.sun)
+                        "02d", "03d" -> binding?.homeImgNow?.setImageResource(R.drawable.sun_cloud)
+                        "01n" -> binding?.homeImgNow?.setImageResource(R.drawable.moon)
+                        "02n", "03n" -> binding?.homeImgNow?.setImageResource(R.drawable.moon_cloud)
+                        "04d", "13d", "50d", "04n", "13n", "50n" -> binding?.homeImgNow?.setImageResource(
+                            R.drawable.cloud
+                        )
+                    }
+                }
             }
-
-
         })
 
-        viewModel.errorMessage.observe(this, Observer{
+        viewModel.errorMessage.observe(this, Observer {
             Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
         })
 
-
-
-
     }
-
-
 
     private fun permissions() {
         if (!isPermissionGranted())
@@ -110,13 +110,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
                 requireContext(),
                 Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED)
+            ) != PackageManager.PERMISSION_GRANTED
+        )
 
-        fosuedLocationProvider.lastLocation.addOnSuccessListener {
-            lat = it.latitude.toString()
-            lon = it.longitude.toString()
-            viewModel.locationPhone(lat, lon)
-        }
+            fosuedLocationProvider.lastLocation.addOnSuccessListener {
+                lat = it.latitude.toString()
+                lon = it.longitude.toString()
+                viewModel.locationPhone(lat, lon)
+            }
 
         localition.lastLocation.addOnSuccessListener {
             lat = it.latitude.toString()
@@ -140,5 +141,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
             LOCALITION_PERMISSON_CODE
         )
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
     }
 }
