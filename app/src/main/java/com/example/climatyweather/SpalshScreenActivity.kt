@@ -27,6 +27,7 @@ class SpalshScreenActivity : AppCompatActivity() {
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
                 }
             })
+
             duration = 1000
             alpha(1.0f)
             start()
