@@ -15,7 +15,7 @@
         android:theme="@style/Theme.ClimatyWeather" >
 
         <activity
-            android:name=".SpalshScreenActivity"
+            android:name=".view.SplashScreenActivity"
             android:exported="true" >
 
             <intent-filter>
