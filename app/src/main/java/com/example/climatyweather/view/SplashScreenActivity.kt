@@ -1,20 +1,19 @@
-package com.example.climatyweather
+package com.example.climatyweather.view
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.climatyweather.databinding.ActivitySpalshScreenBinding
-import com.example.climatyweather.view.MainActivity
+import com.example.climatyweather.databinding.ActivitySplashScreenBinding
 
-class SpalshScreenActivity : AppCompatActivity() {
+class SplashScreenActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivitySpalshScreenBinding
+    private lateinit var binding: ActivitySplashScreenBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySpalshScreenBinding.inflate(layoutInflater)
+        binding = ActivitySplashScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.splashImg.animate().apply {
@@ -22,7 +21,7 @@ class SpalshScreenActivity : AppCompatActivity() {
             setListener(object : AnimatorListenerAdapter(){
                 override fun onAnimationEnd(animation: Animator?) {
                     super.onAnimationEnd(animation)
-                    val intent = Intent(this@SpalshScreenActivity, MainActivity::class.java)
+                    val intent = Intent(this@SplashScreenActivity, MainActivity::class.java)
                     startActivity(intent)
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
                 }
