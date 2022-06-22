@@ -27,6 +27,8 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         binding.mainNavBottom.setOnNavigationItemSelectedListener(this)
         binding.mainNavBottom.selectedItemId = R.id.menu_home
 
+
+
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
