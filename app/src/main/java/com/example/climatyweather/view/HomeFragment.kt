@@ -93,7 +93,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
 
     private fun locationPhone() {
-        val localition = FusedLocationProviderClient(requireContext())
+        val location = FusedLocationProviderClient(requireContext())
 
         //required code to use locationServices
         if (ActivityCompat.checkSelfPermission(
@@ -107,7 +107,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             //Required code to work location service
         }
 
-        localition.lastLocation.addOnSuccessListener {
+        location.lastLocation.addOnSuccessListener {
             lat = it.latitude.toString()
             lon = it.longitude.toString()
             viewModel.locationPhone(lat, lon)
