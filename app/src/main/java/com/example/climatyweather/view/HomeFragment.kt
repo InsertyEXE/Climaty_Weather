@@ -17,7 +17,6 @@ import com.example.climatyweather.rest.WeatherRetrofitConfig
 import com.example.climatyweather.viewmodel.MainViewModel
 import com.example.climatyweather.viewmodel.MainViewModelFactory
 import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
 import kotlin.math.roundToInt
 
 
@@ -95,8 +94,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun locationPhone() {
         val localition = FusedLocationProviderClient(requireContext())
-        val fosuedLocationProvider =
-            LocationServices.getFusedLocationProviderClient(requireContext())
 
         //required code to use locationServices
         if (ActivityCompat.checkSelfPermission(
@@ -106,13 +103,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 requireContext(),
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
-        )
-
-            fosuedLocationProvider.lastLocation.addOnSuccessListener {
-                lat = it.latitude.toString()
-                lon = it.longitude.toString()
-                viewModel.locationPhone(lat, lon)
-            }
+        ){
+            //Required code to work location service
+        }
 
         localition.lastLocation.addOnSuccessListener {
             lat = it.latitude.toString()
