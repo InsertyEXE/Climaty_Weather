@@ -31,7 +31,7 @@ An app made to query the forecast in your current location and search any weathe
  
  ## Trying
  
- App: [Download apk climaty weather](https://github.com/InsertyEXE/Climaty-Weather/blob/master/climaty%20weather.apk)
+ App: [Download apk climaty weather](https://github.com/InsertyEXE/Climaty-Weather/raw/master/climaty%20weather.apk)
  
  ## TODO
  
