@@ -2,7 +2,7 @@ package com.example.climatyweather.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.climatyweather.MainRepository
+import com.example.climatyweather.model.MainRepository
 
 class MainViewModelFactory(private val repository: MainRepository): ViewModelProvider.Factory {
 

@@ -13,7 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.climatyweather.MainRepository
+import com.example.climatyweather.model.MainRepository
 import com.example.climatyweather.R
 import com.example.climatyweather.model.SearchAdapter
 import com.example.climatyweather.databinding.FragmentSearchBinding

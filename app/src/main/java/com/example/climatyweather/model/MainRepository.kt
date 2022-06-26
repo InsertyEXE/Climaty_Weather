@@ -1,4 +1,4 @@
-package com.example.climatyweather
+package com.example.climatyweather.model
 
 import com.example.climatyweather.rest.WeatherRetrofitConfig
 
