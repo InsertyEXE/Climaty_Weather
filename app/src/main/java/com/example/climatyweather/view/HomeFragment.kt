@@ -10,7 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.climatyweather.MainRepository
+import com.example.climatyweather.model.MainRepository
 import com.example.climatyweather.R
 import com.example.climatyweather.databinding.FragmentHomeBinding
 import com.example.climatyweather.rest.WeatherRetrofitConfig

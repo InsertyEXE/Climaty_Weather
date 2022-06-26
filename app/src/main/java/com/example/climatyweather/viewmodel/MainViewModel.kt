@@ -2,7 +2,7 @@ package com.example.climatyweather.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.climatyweather.MainRepository
+import com.example.climatyweather.model.MainRepository
 import com.example.climatyweather.model.WeatherApiResult
 import retrofit2.Call
 import retrofit2.Callback
