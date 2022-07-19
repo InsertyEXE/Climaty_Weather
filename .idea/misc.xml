@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android studio/Projetos Kotlin/Climaty-Weather/app/src/main/res/layout/fragment_home.xml" value="0.33" />
         <entry key="..\:/Projetos/Projetos Android/Projetos kotlin/climatyweather/app/src/main/res/drawable/background_gd.xml" value="0.2105" />
         <entry key="..\:/Projetos/Projetos Android/Projetos kotlin/climatyweather/app/src/main/res/drawable/card_style.xml" value="0.21" />
         <entry key="..\:/Projetos/Projetos Android/Projetos kotlin/climatyweather/app/src/main/res/drawable/cursor_style.xml" value="0.1855" />
@@ -23,7 +24,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

@@ -24,6 +24,7 @@
         android:layout_marginTop="12dp"
         android:layout_marginStart="100dp"
         android:layout_marginEnd="100dp"
+        android:src="@drawable/rain"
         app:layout_constraintBottom_toTopOf="@id/home_txt_weather"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
