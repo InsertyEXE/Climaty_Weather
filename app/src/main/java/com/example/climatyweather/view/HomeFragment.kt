@@ -1,7 +1,13 @@
 package com.example.climatyweather.view
 
 import android.Manifest
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.pm.PackageManager
+import android.location.Criteria
+import android.location.Location
+import android.location.LocationListener
+import android.location.LocationManager
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -10,9 +16,9 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.climatyweather.model.MainRepository
 import com.example.climatyweather.R
 import com.example.climatyweather.databinding.FragmentHomeBinding
+import com.example.climatyweather.model.MainRepository
 import com.example.climatyweather.rest.WeatherRetrofitConfig
 import com.example.climatyweather.viewmodel.MainViewModel
 import com.example.climatyweather.viewmodel.MainViewModelFactory
@@ -92,43 +98,63 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
 
+    @SuppressLint("MissingPermission")
     private fun locationPhone() {
         val location = FusedLocationProviderClient(requireContext())
 
-        //required code to use locationServices
-        if (ActivityCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ){
-            //Required code to work location service
-        }
+        val service = requireContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        val criteria = Criteria()
+        val bestProvider = service.getBestProvider(criteria, true).toString()
 
         location.lastLocation.addOnSuccessListener {
-            lat = it.latitude.toString()
-            lon = it.longitude.toString()
-            viewModel.locationPhone(lat, lon)
+
+            //getting location if there is some already available
+            if (it != null){
+                lon = it.longitude.toString()
+                lat = it.latitude.toString()
+                viewModel.locationPhone(lat, lon)
+            }
+
+            else {
+                /*
+                Getting actually location if does not
+                exist one already prepared in cache phone
+                 */
+                service.requestLocationUpdates(bestProvider, 1000, 0f, object : LocationListener {
+                    override fun onLocationChanged(location: Location) {
+                        lat = location.latitude.toString()
+                        lon = location.longitude.toString()
+                        viewModel.locationPhone(lat, lon)
+                    }
+
+                    //obligatory func to execute
+                    override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
+                        super.onStatusChanged(provider, status, extras)
+                    }
+                })
+            }
+
         }
 
+    }
+
+
+    private fun requestLocationPermission() {
+        return ActivityCompat.requestPermissions(
+            requireActivity(),
+            arrayOf(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+            ),
+            LOCALITION_PERMISSON_CODE
+        )
     }
 
     private fun isPermissionGranted(): Boolean {
-        return ContextCompat.checkSelfPermission(
+
+        return ActivityCompat.checkSelfPermission(
             requireContext(),
             Manifest.permission.ACCESS_FINE_LOCATION
         ) == PackageManager.PERMISSION_GRANTED
-    }
-
-    private fun requestLocationPermission() {
-
-        return ActivityCompat.requestPermissions(
-            requireActivity(),
-            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-            LOCALITION_PERMISSON_CODE
-        )
     }
 
     override fun onDestroy() {

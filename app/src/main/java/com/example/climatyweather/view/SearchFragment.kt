@@ -49,7 +49,6 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     override fun onResume() {
         super.onResume()
 
-
         viewModel.errorMessage.observe(viewLifecycleOwner, Observer {
             Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
         })
@@ -64,7 +63,6 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                 openDialog(weather)
 
             }
-
         })
 
         binding?.searchSrc?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -74,7 +72,6 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             }
 
             override fun onQueryTextChange(query: String?): Boolean {
-
                 return false
             }
 
