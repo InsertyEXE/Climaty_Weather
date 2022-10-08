@@ -29,7 +29,7 @@ An app made to query the forecast in your current location and search any weathe
   * Google location: 'com.google.android.gms:play-services-location:19.0.1'
   * viewModel: "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1"
  
- ## Trying
+ ## Try
  
  App: [Download apk climaty weather](https://github.com/InsertyEXE/Climaty-Weather/raw/master/climaty%20weather.apk)
  
