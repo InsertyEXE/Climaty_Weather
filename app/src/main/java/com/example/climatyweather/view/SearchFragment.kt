@@ -17,6 +17,7 @@ import com.example.climatyweather.model.MainRepository
 import com.example.climatyweather.R
 import com.example.climatyweather.model.SearchAdapter
 import com.example.climatyweather.databinding.FragmentSearchBinding
+import com.example.climatyweather.model.IViewProgress
 import com.example.climatyweather.model.WeatherApiResult
 import com.example.climatyweather.rest.WeatherRetrofitConfig
 import com.example.climatyweather.viewmodel.SearchViewModel
@@ -27,7 +28,7 @@ private val retrofitService = WeatherRetrofitConfig.getInstance()
 private lateinit var viewModel: SearchViewModel
 private var itemsCity: ArrayList<WeatherApiResult> = arrayListOf()
 
-class SearchFragment : Fragment(R.layout.fragment_search) {
+class SearchFragment : Fragment(R.layout.fragment_search), IViewProgress {
 
     private var binding: FragmentSearchBinding? = null
 
@@ -39,9 +40,9 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         binding?.searchRv?.layoutManager = LinearLayoutManager(requireContext())
 
         viewModel = ViewModelProvider(
-            this, SearchViewModelFactory(MainRepository(retrofitService))
+            this, SearchViewModelFactory(this, MainRepository(retrofitService))
         ).get(
-            SearchViewModel::class.java
+             SearchViewModel::class.java
         )
 
     }
@@ -54,15 +55,9 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         })
 
         viewModel.searchCity.observe(viewLifecycleOwner, Observer {
-
-            if (!itemsCity.contains(it))
-                itemsCity.add(it)
-
-            binding?.searchRv?.adapter = SearchAdapter(itemsCity) { weather ->
-
-                openDialog(weather)
-
-            }
+            if (!itemsCity.contains(it)) itemsCity.add(it)
+            binding?.searchRv?.adapter?.notifyDataSetChanged()
+            binding?.searchRv?.adapter = SearchAdapter(itemsCity) { weather -> openDialog(weather) }
         })
 
         binding?.searchSrc?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -118,5 +113,10 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         builder.create()
         builder.show()
 
+    }
+
+    override fun showProgress(enabled: Boolean) {
+        if (enabled) binding?.progressCircular?.visibility = View.VISIBLE
+        else binding?.progressCircular?.visibility = View.GONE
     }
 }

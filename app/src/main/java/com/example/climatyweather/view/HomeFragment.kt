@@ -18,6 +18,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.climatyweather.R
 import com.example.climatyweather.databinding.FragmentHomeBinding
+import com.example.climatyweather.model.IViewProgress
 import com.example.climatyweather.model.MainRepository
 import com.example.climatyweather.rest.WeatherRetrofitConfig
 import com.example.climatyweather.viewmodel.MainViewModel
@@ -32,7 +33,7 @@ private lateinit var lat: String
 private lateinit var lon: String
 private lateinit var viewModel: MainViewModel
 
-class HomeFragment : Fragment(R.layout.fragment_home) {
+class HomeFragment : Fragment(R.layout.fragment_home), IViewProgress {
 
     private var binding: FragmentHomeBinding? = null
 
@@ -43,17 +44,16 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         viewModel = ViewModelProvider(
             this,
-            MainViewModelFactory(MainRepository(retrofitService))
-        ).get(
-            MainViewModel::class.java
-        )
+            MainViewModelFactory(this, MainRepository(retrofitService))
+        )[MainViewModel::class.java]
 
+        permissions()
+        showProgress(true)
     }
 
     override fun onResume() {
         super.onResume()
 
-        permissions()
         locationPhone()
 
         viewModel.city.observe(viewLifecycleOwner, Observer { weather ->
@@ -95,6 +95,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private fun permissions() {
         if (!isPermissionGranted())
             requestLocationPermission()
+        else viewModel.requestPermissionGranted()
     }
 
 
@@ -109,13 +110,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         location.lastLocation.addOnSuccessListener {
 
             //getting location if there is some already available
-            if (it != null){
+            if (it != null) {
                 lon = it.longitude.toString()
                 lat = it.latitude.toString()
                 viewModel.locationPhone(lat, lon)
-            }
-
-            else {
+            } else {
                 /*
                 Getting actually location if does not
                 exist one already prepared in cache phone
@@ -151,6 +150,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun isPermissionGranted(): Boolean {
 
+        viewModel.requestPermissionGranted()
         return ActivityCompat.checkSelfPermission(
             requireContext(),
             Manifest.permission.ACCESS_FINE_LOCATION
@@ -160,5 +160,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onDestroy() {
         super.onDestroy()
         binding = null
+    }
+
+    override fun showProgress(enabled: Boolean) {
+        if (enabled) binding?.progressCircular?.visibility = View.VISIBLE
+        else binding?.progressCircular?.visibility = View.GONE
     }
 }

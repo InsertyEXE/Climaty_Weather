@@ -5,11 +5,20 @@
     android:layout_height="match_parent"
     android:background="@color/preto">
 
+    <ProgressBar
+        android:id="@+id/progress_circular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/home_txt_city"
         style="@style/Theme.ClimatyWeather.BaseTextview"
         android:fontFamily="@font/poppins"
-        android:text="-"
         android:textSize="28sp"
         android:singleLine="true"
         android:layout_marginTop="50dp"
@@ -34,7 +43,7 @@
         style="@style/Theme.ClimatyWeather.BaseTextview"
         android:layout_marginTop="12dp"
         android:fontFamily="@font/poppins"
-        android:text="-"
+
         android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="@id/home_img_now"
         app:layout_constraintStart_toStartOf="@id/home_img_now"
@@ -43,7 +52,6 @@
     <TextView
         android:id="@+id/home_txt_stats"
         style="@style/Theme.ClimatyWeather.BaseTextview"
-        android:text="-"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@id/home_txt_weather"
         app:layout_constraintStart_toStartOf="@id/home_txt_weather"
@@ -53,7 +61,6 @@
         android:id="@+id/home_txt_temp"
         style="@style/Theme.ClimatyWeather.BaseTextview"
         android:fontFamily="@font/poppins_medium"
-        android:text="0C°"
         android:textSize="52sp"
         app:layout_constraintBottom_toTopOf="@+id/home_img_humidity"
         app:layout_constraintEnd_toEndOf="@id/home_txt_stats"
