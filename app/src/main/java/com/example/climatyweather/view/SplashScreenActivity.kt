@@ -19,7 +19,7 @@ class SplashScreenActivity : AppCompatActivity() {
         binding.splashImg.animate().apply {
 
             setListener(object : AnimatorListenerAdapter(){
-                override fun onAnimationEnd(animation: Animator?) {
+                override fun onAnimationEnd(animation: Animator) {
                     super.onAnimationEnd(animation)
                     val intent = Intent(this@SplashScreenActivity, MainActivity::class.java)
                     startActivity(intent)

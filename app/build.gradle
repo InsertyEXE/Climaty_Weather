@@ -6,22 +6,32 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 34
 
     defaultConfig {
-        applicationId "com.example.climatyweather"
+        applicationId "com.inserty.climatyweather"
         minSdk 22
-        targetSdk 32
-        versionCode 1
-        versionName "2.0"
+        targetSdk 34
+        versionCode 5
+        versionName "1.2.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        release {
+            storeFile file("..\\keystore.jks")
+            storePassword "123123"
+            keyAlias "upload_lias"
+            keyPassword "123123"
+        }
     }
 
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     compileOptions {
